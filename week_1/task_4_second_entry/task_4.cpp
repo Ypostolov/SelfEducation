@@ -1,21 +1,22 @@
 #include <iostream>
 #include <string>
-#include <algorithm>
 
-int main()
-{
-    std::string string_;
-    std::cin >> string_;
-    int count_ = count(string_.begin(), string_.end(), 'f');
-    if (count_ == 1) {
-        std::cout << -1;
-    }
-    else if (count_ == 0) {
-        std::cout << -2;
-    }
-    else {
-        std::cout << (string_.find('f', string_.find('f') + 1));
-    };
+int main() {
+  std::string string_;
+  std::cin >> string_;
 
-    return 0;
+  if (string_.find('f') == std::string::npos) {
+      
+    std::cout << -2;
+    
+  } else if ((string_.find('f', string_.find('f') + 1)) > 0 &&
+             (string_.find('f', string_.find('f') + 1)) != std::string::npos) {
+
+    std::cout << (string_.find('f', string_.find('f') + 1));
+    
+  } else {
+    std::cout << -1;
+  };
+
+  return 0;
 }
