@@ -1,40 +1,27 @@
 #include <algorithm>
-#include <cctype>
 #include <iostream>
 #include <string>
 #include <vector>
-
-bool Abs(const std::string& s1, const std::string& s2) {
-  char a, b;
-  for (char c : s1) {
-    a = tolower(c);
-  };
-  for (char c1 : s2) {
-    b = tolower(c1);
-  };
-  if (a < b) {
-    return true;
-  }
-  return false;
-}
-
+using namespace std;
 int main() {
-  int A;
-  std::string b;
-  std::cin >> A;
-  std::vector<std::string> Strings;
-  if (A >= 0 && A <= 1000) {
-    for (int i = 0; i < A; ++i) {
-      std::cin >> b;
-      if (1 <= b.length() && b.length() < 15) {
-        Strings.push_back(b);
-      }
-    }
-    sort(begin(Strings), end(Strings), Abs);
-
-    for (const auto& s : Strings) {
-      std::cout << s << " ";
-    }
+  int n;
+  cin >> n;
+  vector<string> v(n);
+  for (string& s : v) {
+    cin >> s;
+  }
+  sort(begin(v),
+       end(v),
+       [](const string& l, const string& r) {
+         return lexicographical_compare(
+             begin(l),
+             end(l),
+             begin(r),
+             end(r),
+             [](char cl, char cr) { return tolower(cl) < tolower(cr); });
+       });
+  for (const string& s : v) {
+    cout << s << ' ';
   }
   return 0;
 }
