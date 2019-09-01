@@ -16,8 +16,7 @@ struct Params {
 
 
 class FunctionPart {
- 
-  private:
+   private:
   char operation;
   double value;
  
