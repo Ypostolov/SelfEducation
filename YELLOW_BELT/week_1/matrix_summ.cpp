@@ -18,6 +18,7 @@ class Matrix {
     for (int i = 0; i < num_rows_; ++i) {
       delete arr[i];
     }
+    delete[] arr;
   }
 
   void push(int row_number_, int column_number_, int val_) {
