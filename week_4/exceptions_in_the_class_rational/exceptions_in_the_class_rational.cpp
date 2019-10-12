@@ -116,39 +116,40 @@ class Rational {
     return result;
   }
 
+  friend std::istream& operator>>(std::istream& stream, Rational& r) {
+    int p_t, q_t;
+    stream >> p_t;
+    stream.ignore(1);  // ignore '/'
+    stream >> q_t;
+    r.Initialize(p_t, q_t);
+    return stream;
+  }
+
+  friend std::ostream& operator<<(std::ostream& stream, const Rational& r) {
+    stream << r.Numerator() << '/' << r.Denominator();
+    return stream;
+  }
+  friend Rational operator*(const Rational& left, const Rational& right) {
+    Rational result;
+    result.Initialize((right.Numerator() * left.Numerator()),
+                      (right.Denominator() * left.Denominator()));
+    return result;
+  }
+  friend Rational operator/(const Rational& left, const Rational& right) {
+    if (right.Numerator() == 0) {
+      throw std::domain_error("Achtung!");
+    } else {
+      Rational result;
+      result.Initialize((left.Numerator() * right.Denominator()),
+                        (left.Denominator() * right.Numerator()));
+      return result;
+    }
+  }
+
  private:
   int p;
   int q;
 };
-
-std::istream& operator>>(std::istream& stream, Rational& r) {
-  int p_t, q_t;
-  stream >> p_t;
-  stream.ignore(1);  // ignore '/'
-  stream >> q_t;
-  r.Initialize(p_t, q_t);
-  return stream;
-}
-std::ostream& operator<<(std::ostream& stream, const Rational& r) {
-  stream << r.Numerator() << '/' << r.Denominator();
-  return stream;
-}
-Rational operator*(const Rational& left, const Rational& right) {
-  Rational result;
-  result.Initialize((right.Numerator() * left.Numerator()),
-                    (right.Denominator() * left.Denominator()));
-  return result;
-}
-Rational operator/(const Rational& left, const Rational& right) {
-  if (right.Numerator() == 0) {
-    throw std::domain_error("WTF?");
-  } else {
-    Rational result;
-    result.Initialize((left.Numerator() * right.Denominator()),
-                      (left.Denominator() * right.Numerator()));
-    return result;
-  }
-}
 
 int main() {
   try {
