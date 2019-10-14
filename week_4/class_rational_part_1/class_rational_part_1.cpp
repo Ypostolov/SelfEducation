@@ -27,6 +27,8 @@ class Rational {
     divider = Divider();
   }
 
+  Rational(const Rational& r) {}
+
   int Divider() {
     if (p == q) {
       return p;
