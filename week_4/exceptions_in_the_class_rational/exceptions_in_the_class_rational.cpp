@@ -129,19 +129,19 @@ class Rational {
     stream << r.Numerator() << '/' << r.Denominator();
     return stream;
   }
-  friend Rational operator*(const Rational& left, const Rational& right) {
+  Rational operator*(const Rational& right) {
     Rational result;
-    result.Initialize((right.Numerator() * left.Numerator()),
-                      (right.Denominator() * left.Denominator()));
+    result.Initialize((this->Numerator() * right.Numerator()),
+                      (this->Denominator() * right.Denominator()));
     return result;
   }
-  friend Rational operator/(const Rational& left, const Rational& right) {
+  Rational operator/(const Rational& right) {
     if (right.Numerator() == 0) {
       throw std::domain_error("Achtung!");
     } else {
       Rational result;
-      result.Initialize((left.Numerator() * right.Denominator()),
-                        (left.Denominator() * right.Numerator()));
+      result.Initialize((this->Numerator() * right.Denominator()),
+                        (this->Denominator() * right.Numerator()));
       return result;
     }
   }
