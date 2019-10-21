@@ -27,7 +27,10 @@ class Rational {
     divider = Divider();
   }
 
-  Rational(const Rational& r) {}
+  Rational(const Rational& r) {
+    p = r.p;
+    q = r.q;
+  }
 
   int Divider() {
     if (p == q) {
@@ -71,51 +74,62 @@ class Rational {
   int q;
 };
 
-int main() {
-  {
-    const Rational r(3, 10);
-    if (r.Numerator() != 3 || r.Denominator() != 10) {
-      std::cout << "Rational(3, 10) != 3/10" << std::endl;
-      return 1;
-    }
+int test_1(int numerat, int denominat) {
+  Rational r(numerat, denominat);
+  if (r.Numerator() != 3 || r.Denominator() != 10) {
+    std::cout << "Rational(3, 10) != 3/10" << std::endl;
+    return 1;
   }
-  {
-    const Rational r(8, 12);
-    if (r.Numerator() != 2 || r.Denominator() != 3) {
-      std::cout << "Rational(8, 12) != 2/3" << std::endl;
-      return 2;
-    }
-  }
-  {
-    const Rational r(-4, 6);
-    if (r.Numerator() != -2 || r.Denominator() != 3) {
-      std::cout << "Rational(-4, 6) != -2/3" << std::endl;
-      return 3;
-    }
-  }
-  {
-    const Rational r(4, -6);
-    if (r.Numerator() != -2 || r.Denominator() != 3) {
-      std::cout << "Rational(4, -6) != -2/3" << std::endl;
-      return 3;
-    }
-  }
-  {
-    const Rational r(0, 15);
-    if (r.Numerator() != 0 || r.Denominator() != 1) {
-      std::cout << "Rational(0, 15) != 0/1" << std::endl;
-      return 4;
-    }
-  }
+}
 
-  {
-    const Rational defaultConstructed;
-    if (defaultConstructed.Numerator() != 0 ||
-        defaultConstructed.Denominator() != 1) {
-      std::cout << "Rational() != 0/1" << std::endl;
-      return 5;
-    }
+int test_2(int numerat, int denominat) {
+  Rational r(numerat, denominat);
+  if (r.Numerator() != 2 || r.Denominator() != 3) {
+    std::cout << "Rational(8, 12) != 2/3" << std::endl;
+    return 2;
   }
+}
+
+int test_3(int numerat, int denominat) {
+  Rational r(numerat, denominat);
+  if (r.Numerator() != -2 || r.Denominator() != 3) {
+    std::cout << "Rational(-4, 6) != -2/3" << std::endl;
+    return 2;
+  }
+}
+
+int test_4(int numerat, int denominat) {
+  Rational r(numerat, denominat);
+  if (r.Numerator() != -2 || r.Denominator() != 3) {
+    std::cout << "Rational(4, -6) != -2/3" << std::endl;
+    return 3;
+  }
+}
+
+int test_5(int numerat, int denominat) {
+  Rational r(numerat, denominat);
+  if (r.Numerator() != 0 || r.Denominator() != 1) {
+    std::cout << "Rational(0, 15) != 0/1" << std::endl;
+    return 4;
+  }
+}
+
+int test_6() {
+  Rational defaultConstructed;
+  if (defaultConstructed.Numerator() != 0 ||
+      defaultConstructed.Denominator() != 1) {
+    std::cout << "Rational() != 0/1" << std::endl;
+    return 5;
+  }
+}
+
+int main() {
+  test_1(3, 10);
+  test_2(8, 12);
+  test_3(-4, 6);
+  test_4(4, -6);
+  test_5(0, 15);
+  test_6();
   std::cout << "OK" << std::endl;
   getchar();
   return 0;
