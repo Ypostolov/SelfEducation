@@ -49,6 +49,45 @@ class Matrix {
   int& At(int row_number_, int column_number_) {
     return arr[row_number_][column_number_];
   }
+
+  Matrix operator+(const Matrix& two) {
+    if (this->GetNumRows() != two.GetNumRows()) {
+      throw std::invalid_argument("Mismatched number of rows");
+    }
+
+    if (this->GetNumColumns() != two.GetNumColumns()) {
+      throw std::invalid_argument("Mismatched number of columns");
+    }
+
+    Matrix result(this->GetNumRows(), this->GetNumColumns());
+    for (int row = 0; row < result.GetNumRows(); ++row) {
+      for (int column = 0; column < result.GetNumColumns(); ++column) {
+        result.At(row, column) = this->At(row, column) + two.At(row, column);
+      }
+    }
+
+    return result;
+  }
+
+  bool operator==(const Matrix& two) {
+    if (this->GetNumRows() != two.GetNumRows()) {
+      return false;
+    }
+
+    if (this->GetNumColumns() != two.GetNumColumns()) {
+      return false;
+    }
+
+    for (int row = 0; row < this->GetNumRows(); ++row) {
+      for (int column = 0; column < this->GetNumColumns(); ++column) {
+        if (this->At(row, column) != two.At(row, column)) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
 };
 
 void fill(Matrix& a) {
@@ -71,51 +110,12 @@ void show(const Matrix& a) {
   }
 }
 
-bool operator==(const Matrix& one, const Matrix& two) {
-  if (one.GetNumRows() != two.GetNumRows()) {
-    return false;
-  }
-
-  if (one.GetNumColumns() != two.GetNumColumns()) {
-    return false;
-  }
-
-  for (int row = 0; row < one.GetNumRows(); ++row) {
-    for (int column = 0; column < one.GetNumColumns(); ++column) {
-      if (one.At(row, column) != two.At(row, column)) {
-        return false;
-      }
-    }
-  }
-
-  return true;
-}
-
-Matrix operator+(const Matrix& one, const Matrix& two) {
-  if (one.GetNumRows() != two.GetNumRows()) {
-    throw std::invalid_argument("Mismatched number of rows");
-  }
-
-  if (one.GetNumColumns() != two.GetNumColumns()) {
-    throw std::invalid_argument("Mismatched number of columns");
-  }
-
-  Matrix result(one.GetNumRows(), one.GetNumColumns());
-  for (int row = 0; row < result.GetNumRows(); ++row) {
-    for (int column = 0; column < result.GetNumColumns(); ++column) {
-      result.At(row, column) = one.At(row, column) + two.At(row, column);
-    }
-  }
-
-  return result;
-}
-
 int main() {
-  Matrix one;
+  Matrix one(2, 5);
   fill(one);
   show(one);
 
-  Matrix two;
+  Matrix two(2, 5);
   fill(two);
   show(two);
 
