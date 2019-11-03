@@ -1,5 +1,5 @@
 #include <iostream>
-
+template <typename T>
 class Matrix {
  public:
   int num_rows_;
@@ -90,7 +90,7 @@ class Matrix {
   }
 };
 
-void fill(Matrix& a) {
+void fill(Matrix<int>& a) {
   for (int i = 0; i < a.GetNumRows(); ++i) {
     for (int j = 0; j < a.GetNumColumns(); ++j) {
       a.push(i, j, rand() % 20);
@@ -99,7 +99,7 @@ void fill(Matrix& a) {
   std::cout << std::endl;
 }
 
-void show(const Matrix& a) {
+void show(const Matrix<int>& a) {
   std::cout << a.GetNumRows() << "  " << a.GetNumColumns();
   std::cout << std::endl;
   for (int i = 0; i < a.GetNumRows(); ++i) {
@@ -111,15 +111,15 @@ void show(const Matrix& a) {
 }
 
 int main() {
-  Matrix one(2, 5);
+  Matrix<int> one(2, 5);
   fill(one);
   show(one);
 
-  Matrix two(2, 5);
+  Matrix<int> two(2, 5);
   fill(two);
   show(two);
 
-  const Matrix rezult = one + two;
+  const Matrix<int> rezult = one + two;
 
   std::cout << std::endl;
   show(rezult);
