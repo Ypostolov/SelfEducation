@@ -30,7 +30,7 @@ class Matrix {
     delete[] arr;
   }
 
-  void push(int row_number_, int column_number_, int val_) {
+  void push(int row_number_, int column_number_, T val_) {
     arr[row_number_][column_number_] = val_;
   }
 
@@ -42,11 +42,11 @@ class Matrix {
     return num_columns_;
   }
 
-  int At(int row_number_, int column_number_) const {
+  T At(int row_number_, int column_number_) const {
     return arr[row_number_][column_number_];
   }
 
-  int& At(int row_number_, int column_number_) {
+  T& At(int row_number_, int column_number_) {
     return arr[row_number_][column_number_];
   }
 
@@ -90,7 +90,8 @@ class Matrix {
   }
 };
 
-void fill(Matrix<int>& a) {
+template <typename T>
+void fill(Matrix<T>& a) {
   for (int i = 0; i < a.GetNumRows(); ++i) {
     for (int j = 0; j < a.GetNumColumns(); ++j) {
       a.push(i, j, rand() % 20);
@@ -99,7 +100,8 @@ void fill(Matrix<int>& a) {
   std::cout << std::endl;
 }
 
-void show(const Matrix<int>& a) {
+template <typename T>
+void show(const Matrix<T>& a) {
   std::cout << a.GetNumRows() << "  " << a.GetNumColumns();
   std::cout << std::endl;
   for (int i = 0; i < a.GetNumRows(); ++i) {
