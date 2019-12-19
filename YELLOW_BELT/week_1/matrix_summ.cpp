@@ -4,23 +4,23 @@ class Matrix {
  public:
   int num_rows_;
   int num_columns_;
-  int** arr;
+  T** arr;
 
   Matrix() {
     num_rows_ = 3;
     num_columns_ = 5;
     arr = new int*[num_rows_];
     for (int i = 0; i < num_rows_; ++i) {
-      arr[i] = new int[num_columns_];
+      arr[i] = new T[num_columns_];
     }
   }
 
   Matrix(int row_number_, int column_number_) {
     num_rows_ = row_number_;
     num_columns_ = column_number_;
-    arr = new int*[num_rows_];
+    arr = new T*[num_rows_];
     for (int i = 0; i < num_rows_; ++i) {
-      arr[i] = new int[num_columns_];
+      arr[i] = new T[num_columns_];
     }
   }
   ~Matrix() {
@@ -113,15 +113,15 @@ void show(const Matrix<T>& a) {
 }
 
 int main() {
-  Matrix<int> one(2, 5);
+  Matrix<double> one(2, 5);
   fill(one);
   show(one);
 
-  Matrix<int> two(2, 5);
+  Matrix<double> two(2, 5);
   fill(two);
   show(two);
 
-  const Matrix<int> rezult = one + two;
+  const Matrix<double> rezult = one + two;
 
   std::cout << std::endl;
   show(rezult);
